@@ -1,17 +1,34 @@
 import sys
 import csv
 
-if len(sys.argv) < 2:
-    print('Spróbuj jeszcze raz.Podaj nazwy dwóch plików')
-    exit()
-data = []
-with open ('in.csv', 'r') as f:
-    reader = csv.reader(f)
-    for k in reader:
-        data.append(k)
-        print(k)
+#nadanie zmiennych, ktorych wartosci zostana wprowadzone z terminala
+input = sys.argv[1]
+output = sys.argv[2]
+change = sys.argv[3:]
 
-with open ('out.csv', 'w', newline = '') as f:
+#jezeli uzytkownik poda za malo argumentow lub poda nieprawidlowe program zakonczy dzialanie
+if len(sys.argv) < 2:
+    print('Spróbuj jeszcze raz.Podałeś za mało danych')
+    exit()
+elif input == 'in.csv':
+    print('Spróbuj jeszcze raz.Nieprawidłowa nazwa pliku')
+    exit()
+elif input == 'out.csv':
+    print('Spróbuj jeszcze raz.Nieprawidłowa nazwa pliku')
+    exit()
+
+data = []
+with open (input, 'r') as f:
+    reader = csv.reader(f)
+    for line in reader:
+        data.append(line)
+        print(line)
+
+for changes in change:
+    print(changes)
+
+
+with open (output, 'w', newline = '') as f:
     writer = csv.writer(f)
-    for k in data:
-        writer.writerow(k)
+    for line in data:
+        writer.writerow(line)
